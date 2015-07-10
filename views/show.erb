@@ -1,16 +1,14 @@
-<link href="global.css" rel="stylesheet">
-
 <div class="container" id="id"><%= @m.id %></div>
   <div id="tabs">
-    <div class="tab padding left" id ="general_info">General Info</div>
-    <div class="tab padding left" id="technical_specs">Technical Specs</div>
-    <div class="tab padding left" id ="where_to_buy">Where to Buy</div>
+    <div class="tab padding left grey border selected" id ="general_info">General Info</div>
+    <div class="tab padding left grey border" id="technical_specs">Technical Specs</div>
+    <div class="tab padding left brey border" id ="where_to_buy">Where to Buy</div>
     <div style="clear: both"></div>
   </div>
 
   <div id="contents">
-    <div class="content padding left show" id="general_info"><%= @m.general_info %></div>
-    <div class="content padding left" id="technical_specs"><%= @m.technical_specs %></div>
-    <div class="content padding left" id ="where_to_buy"><%= @m.where_to_buy %></div>
+    <div class="content margin left show general_info grey border"><%= @m.general_info %></div>
+    <div class="content margin left technical_specs grey border"><%= @m.technical_specs %></div>
+    <div class="content margin left where_to_buy grey border"><%= @m.where_to_buy %></div>
   </div>
 </div>
