@@ -1,5 +1,5 @@
-<div class="container" id="id">
-  <p>Product #: <%= @m.id %></p>
+<div class="container id" id="<%= @m.id %>">
+  <p class="container-id">Product #: <%= @m.id %></p>
   <div id="tabs">
     <div class="tab left grey border selected" id ="general_info">General Info</div>
     <div class="tab margin-left left grey border" id="technical_specs">Technical Specs</div>
@@ -11,5 +11,14 @@
     <div class="content margin left show general_info grey border"><%= @m.general_info %></div>
     <div class="content margin left technical_specs grey border"><%= @m.technical_specs %></div>
     <div class="content margin left where_to_buy grey border"><%= @m.where_to_buy %></div>
+    <div style="clear: both"></div>
+  </div>
+  <div id="button-container">
+    <button id="previous" type="submit">Previous Record</button>
+    <button id="next" type="submit">Next Record</button>
+    <div style="clear: both"></div>
   </div>
 </div>
+
+
+
