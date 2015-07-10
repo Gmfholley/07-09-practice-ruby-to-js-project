@@ -7,6 +7,14 @@
   
   <h3 class="first-color"><%=@menu.title%></h3>
 
-   <%= self.method(@html_type).call(@menu, @with_links) %>
+  
+    
+    <% @menu.menu_items.each do |item| %>
+      <% if @with_links %>
+        <a href="/<%= item.method.method_name %>"><p><%= item.user_message.join(", ") %></p></a>
+      <% else %>
+        <p><%= item.user_message.join(", ") %></p>
+      <% end %>
+    <% end %>
 
 </div>
