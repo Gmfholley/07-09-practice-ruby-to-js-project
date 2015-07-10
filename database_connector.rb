@@ -732,7 +732,7 @@ module DatabaseConnector
   #
   # returns an Object
   def get_next_record
-    first_rec = run_sql("SELECT * FROM #{table} WHERE id > #{@id} LIMIT 1;").first
+    first_rec = run_sql("SELECT * FROM #{table} WHERE id > #{@id} ORDER BY id ASC LIMIT 1;").first
     if first_rec.nil?
       return self.class.new()
     else
@@ -744,7 +744,7 @@ module DatabaseConnector
   #
   # returns an Object
   def get_previous_record
-    first_rec = run_sql("SELECT * FROM #{table} WHERE id < #{@id} DESC LIMIT 1;").first
+    first_rec = run_sql("SELECT * FROM #{table} WHERE id < #{@id} ORDER BY id DESC LIMIT 1;").first
     if first_rec.nil?
       return self.class.new()
     else
@@ -755,8 +755,8 @@ module DatabaseConnector
   # returns a string of the object written as javascript
   #
   # returns a String
-  def return_javascript_object
-    js = "{"
+  def return_JSON_of_object
+    js = "{ \"id\": \"#{@id}\","
     database_field_names.each do |field|
       js = "#{js} \"#{field}\": \"#{self.send(field)}\","
     end
