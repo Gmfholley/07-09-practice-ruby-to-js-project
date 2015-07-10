@@ -12,14 +12,12 @@ function toggle_class_name(class_name) {
   }
 }
 
-
 // returns first Element with the passed classname
 //
 // returns an Element DOM object
 function get_first_of_this_class(class_name){
   return document.getElementsByClassName(class_name)[0];
 }
-
 
 // removes selected and show from current selection
 // adds selected and show to the clicked selected
