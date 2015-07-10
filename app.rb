@@ -86,8 +86,13 @@ end
 
 get "/product/show" do 
   @menu = object_menu(Product, "show")
-  @with_links = false
+  @with_links = true
   erb :menu
+end
+
+get "/product/show/:x" do 
+  @m = Product.create_from_database(params["x"].to_i)
+  erb :show
 end
 
 get "/product/delete" do 
