@@ -60,8 +60,6 @@ get "/product/create" do
   erb :create
 end
 
-
-
 get "/product/submit" do 
   @m = Product.new(params["create_form"])
   if @m.valid?
@@ -89,6 +87,14 @@ get "/product/show" do
   @with_links = true
   erb :menu
 end
+
+get "/product/next/:x" do
+  binding.pry 
+  @m = Product.create_from_database(params["x"].to_i)
+  @n = @m.get_next_record
+  return @n.return_javascript_object
+end
+
 
 get "/product/show/:x" do 
   @m = Product.create_from_database(params["x"].to_i)
