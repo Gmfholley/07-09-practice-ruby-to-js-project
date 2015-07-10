@@ -728,6 +728,42 @@ module DatabaseConnector
     class_name.where_match(other_field_name, this_parameter, "==")
   end
   
+  # gets the next records' row in the database
+  #
+  # returns an Object
+  def get_next_record
+    first_rec = run_sql("SELECT * FROM #{table} WHERE id > #{@id} LIMIT 1;").first
+    if first_rec.nil?
+      return self.class.new()
+    else
+      return self.class.new(first_rec)
+    end
+  end
+  
+  # gets the previous records' row in the database
+  #
+  # returns an Object
+  def get_previous_record
+    first_rec = run_sql("SELECT * FROM #{table} WHERE id < #{@id} DESC LIMIT 1;").first
+    if first_rec.nil?
+      return self.class.new()
+    else
+      return self.class.new(first_rec)
+    end
+  end
+  
+  # returns a string of the object written as javascript
+  #
+  # returns a String
+  def return_javascript_object
+    js = "{"
+    database_field_names.each do |field|
+      js = "#{js} \"#{field}\": \"#{self.send(field)}\","
+    end
+    js = "#{js[0...-1]}}"
+  end
+  
+  
   # intended to run SQL string and rescues any errors
   #
   # sql_query - String of the SQL query
