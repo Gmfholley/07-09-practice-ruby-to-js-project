@@ -8,7 +8,7 @@
 function toggle_class_name(class_name) {
   var args = Array.prototype.slice.call(arguments, 1);
   for (i = 0;  i < args.length; i++){
-    args.classList.toggle(class_name);
+    args[i].classList.toggle(class_name);
   }
 }
 
@@ -33,8 +33,7 @@ function display_this_one_and_hide_current() {
   toggle_class_name("selected", this);
 }
 
-
-window.onload = {
+window.onload = function(){
   var all = document.getElementsByClassName("tab");
   for (i = 0; i < all.length; i ++){
     all[i].addEventListener("click", display_this_one_and_hide_current);
