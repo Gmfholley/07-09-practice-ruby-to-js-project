@@ -39,22 +39,66 @@ function get_current_id() {
 }
 
 
+// creates AJAX request to get the next record
+// adds event listener
+// sends request
 //
-
+// returns nothing
 function next_record(){
   var next_record = new XMLHttpRequest(); 
-  console.log(("/product/next/" + get_current_id()));
   next_record.open("get",("/product/next/" + get_current_id()));
-  next_record.addEventListener("load", function(){
-    console.log(this.response);
-  });
+  next_record.addEventListener("load",change_HTML_for_object_response);
   next_record.send();
 }
 
+// creates AJAX request to get the next record
+// adds event listener
+// sends request
+//
+// returns nothing
 function previous_record() {
-  
+  var previous_record = new XMLHttpRequest(); 
+  previous_record.open("get",("/product/previous/" + get_current_id()));
+  previous_record.addEventListener("load",change_HTML_for_object_response);
+  previous_record.send();
 }
 
+// logs the response
+// makes an object object of the response, corresponding to the classes that need to be updated
+// updates those html elements with the value
+//
+// returns nothing
+function change_HTML_for_object_response(){
+  console.log(this.response);
+  var n = JSON.parse(this.response);
+  get_first_of_this_class("container-id").innerHTML=("Product #:" + n["id"]);
+  do_something_to_all_this_object_parameters(n, change_HTML_to_match_parameter);
+  document.getElementById(get_current_id()).id = n["id"];
+}
+
+// changes the HTML of the Element of this class to this object's parameter of same name
+//
+// obj - Object
+// class_name - String of the object's parameter and matching class_name to change to save
+//
+// returns nothing
+function change_HTML_to_match_parameter(obj, class_name){
+  get_first_of_this_class(class_name).innerHTML=obj[class_name];
+}
+
+// do something to this object's parameters
+//
+// obj - javascript Object
+// something - function
+//
+// returns nothing
+function do_something_to_all_this_object_parameters(obj, something) {
+  for (var property in obj) {
+      if (obj.hasOwnProperty(property) && property!="id") {
+        something(obj, property);
+      }
+  }
+}
 
 window.onload = function(){
   var all = document.getElementsByClassName("tab");
@@ -62,5 +106,5 @@ window.onload = function(){
     all[i].addEventListener("click", display_this_one_and_hide_current);
   }
   document.getElementById("next").addEventListener("click", next_record)
-  
+  document.getElementById("previous").addEventListener("click", previous_record)
 }

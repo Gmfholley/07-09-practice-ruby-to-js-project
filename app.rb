@@ -89,10 +89,15 @@ get "/product/show" do
 end
 
 get "/product/next/:x" do
-  binding.pry 
   @m = Product.create_from_database(params["x"].to_i)
   @n = @m.get_next_record
-  return @n.return_javascript_object
+  return @n.return_JSON_of_object
+end
+
+get "/product/previous/:x" do
+  @m = Product.create_from_database(params["x"].to_i)
+  @n = @m.get_previous_record
+  return @n.return_JSON_of_object
 end
 
 
